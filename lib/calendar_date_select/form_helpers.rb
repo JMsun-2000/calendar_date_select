@@ -107,6 +107,8 @@ module CalendarDateSelect::FormHelpers
       hidden_field_tag(name, value, options) :
       text_field_tag(name, value, options)
 
+    Rails.logger.info "----#{tag.inspect}----------#{image.inspect}-----------#{options.inspect}---------#{javascript_options.inspect}----"
+
     calendar_date_select_output(tag, image, options, javascript_options)
   end
 
