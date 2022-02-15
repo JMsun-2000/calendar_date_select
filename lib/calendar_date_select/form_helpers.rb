@@ -102,12 +102,14 @@ module CalendarDateSelect::FormHelpers
     javascript_options.delete(:format)
 
     options[:id] ||= name
-  #  options.merge!(:onclick => "new CalendarDateSelect( $(this), #{"{#{javascript_options.keys.map { |k| "#{k}:#{javascript_options[k]}" }.sort.join(', ')}}"} );")
+
+    if options[:tag_trigger_calendar].present? && options[:tag_trigger_calendar] == true
+      options.merge!(:onclick => "new CalendarDateSelect( $(this), #{"{#{javascript_options.keys.map { |k| "#{k}:#{javascript_options[k]}" }.sort.join(', ')}}"} );")
+    end
+    
     tag = javascript_options[:hidden] || javascript_options[:embedded] ?
       hidden_field_tag(name, value, options) :
       text_field_tag(name, value, options)
-
-    Rails.logger.info "----#{tag.inspect}----------#{image.inspect}-----------#{options.inspect}---------#{javascript_options.inspect}----"
 
     calendar_date_select_output(tag, image, options, javascript_options)
   end
