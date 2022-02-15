@@ -103,10 +103,8 @@ module CalendarDateSelect::FormHelpers
 
     options[:id] ||= name
 
-    if options[:tag_trigger_calendar].present? && options[:tag_trigger_calendar] == true
-      options.merge!(:onclick => "new CalendarDateSelect( $(this), #{"{#{javascript_options.keys.map { |k| "#{k}:#{javascript_options[k]}" }.sort.join(', ')}}"} );")
-    end
-    
+    options.merge!(:onclick => "new CalendarDateSelect( $(this).next(), #{"{#{javascript_options.keys.map { |k| "#{k}:#{javascript_options[k]}" }.sort.join(', ')}}"} );")
+
     tag = javascript_options[:hidden] || javascript_options[:embedded] ?
       hidden_field_tag(name, value, options) :
       text_field_tag(name, value, options)
