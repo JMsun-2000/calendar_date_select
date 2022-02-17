@@ -103,7 +103,11 @@ module CalendarDateSelect::FormHelpers
 
     options[:id] ||= name
 
-    options.merge!(:onclick => "new CalendarDateSelect( $(this).next(), #{"{#{javascript_options.keys.map { |k| "#{k}:#{javascript_options[k]}" }.sort.join(', ')}}"} );")
+    if options[:static_page].present? && options[:static_page] == true
+      options.merge!(:onclick => "new CalendarDateSelect( $(this), #{"{#{javascript_options.keys.map { |k| "#{k}:#{javascript_options[k]}" }.sort.join(', ')}}"} );")
+    else
+      options.merge!(:onclick => "new CalendarDateSelect( $(this).next(), #{"{#{javascript_options.keys.map { |k| "#{k}:#{javascript_options[k]}" }.sort.join(', ')}}"} );")
+    end
 
     tag = javascript_options[:hidden] || javascript_options[:embedded] ?
       hidden_field_tag(name, value, options) :
