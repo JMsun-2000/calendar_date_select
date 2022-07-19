@@ -120,6 +120,8 @@ module CalendarDateSelect::FormHelpers
   #
   # It receives the same options as +calendar_date_select_tag+.  Need for time selection is automatically detected by checking the corresponding column meta information of Model#columns_hash
   def calendar_date_select(object, method, options={})
+    Rails.logger.info "----calendar_date_select------------#{object.inspect}-----------"
+     Rails.logger.info "----#{method.inspect}------------#{options.inspect}-----------"
     obj = options[:object] || instance_variable_get("@#{object}")
 
     if !options.include?(:time) && obj.class.respond_to?("columns_hash")
