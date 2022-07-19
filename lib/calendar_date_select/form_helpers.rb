@@ -120,7 +120,7 @@ module CalendarDateSelect::FormHelpers
   #
   # It receives the same options as +calendar_date_select_tag+.  Need for time selection is automatically detected by checking the corresponding column meta information of Model#columns_hash
   def calendar_date_select(object, method, options={})
-    Rails.logger.info "----calendar_date_select------------#{object.inspect}-----------"
+    Rails.logger.info "----calendar_date_select--next----------#{object.inspect}-----------"
      Rails.logger.info "----#{method.inspect}------------#{options.inspect}-----------"
     obj = options[:object] || instance_variable_get("@#{object}")
 
@@ -155,7 +155,7 @@ module CalendarDateSelect::FormHelpers
     
     options.delete(:object)
     options.merge!(:type => (javascript_options[:hidden] || javascript_options[:embedded]) ? "hidden" : "text")
-    options.merge!(:onclick => "new CalendarDateSelect( $(this), #{"{#{javascript_options.keys.map { |k| "#{k}:#{javascript_options[k]}" }.sort.join(', ')}}"} );")
+    options.merge!(:onclick => "new CalendarDateSelect( $(this).next(), #{"{#{javascript_options.keys.map { |k| "#{k}:#{javascript_options[k]}" }.sort.join(', ')}}"} );")
     tag = ActionView::Helpers::Tags::TextField.new(object, method, self, options).render
 
     calendar_date_select_output(
